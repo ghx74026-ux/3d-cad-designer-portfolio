@@ -13,6 +13,7 @@ import { FloatingContacts } from './components/FloatingContacts';
 import { Assistant } from './components/Assistant';
 import { ProjectModal } from './components/ProjectModal';
 import { DesignProcess } from './components/DesignProcess';
+import { DesignQuote } from './components/DesignQuote';
 import { PortfolioProject } from './types';
 
 export default function App() {
@@ -41,7 +42,7 @@ export default function App() {
   }, [handleNavigate]);
 
   useEffect(() => {
-    const sectionIds = ['home', 'portfolio', 'services', 'process', 'skills', 'software', 'about', 'contact'];
+    const sectionIds = ['home', 'portfolio', 'services', 'process', 'skills', 'software', 'quote', 'about', 'contact'];
     const handleScroll = () => {
       const scrollPosition = (window.scrollY ?? window.pageYOffset ?? document.documentElement.scrollTop) + 120;
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -66,6 +67,7 @@ export default function App() {
         <DesignProcess />
         <Skills />
         <Software />
+        <DesignQuote />
         <CVSection />
         <About />
         <Contact initialSubject={contactSubject} />
