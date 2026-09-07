@@ -1,68 +1,59 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-@layer base {
-  html {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    scroll-behavior: smooth;
-    overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 100%;
-  }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  body {
-    overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 100%;
-    background-color: #0c0d0e;
-  }
-
-  h1, h2, h3, .font-display {
-    font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
-  }
-
-  .font-mono {
-    font-family: 'JetBrains Mono', monospace;
-  }
-}
-
-/* Custom subtle scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
+:root {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color-scheme: dark;
   background: #0c0d0e;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 4px;
-}
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: #0c0d0e; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible { outline: 2px solid #c89b3c; outline-offset: 3px; }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
-}
+::selection { background: #c89b3c; color: #0c0d0e; }
 
-/* Blueprint / CAD grid background utility */
-.cad-grid-bg {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-}
+.font-display { font-family: 'Space Grotesk', 'DM Sans', system-ui, sans-serif; }
 
-.cad-dots-bg {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
-  background-size: 24px 24px;
+@layer components {
+  .section-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-kicker {
+    @apply mb-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#c89b3c];
+  }
+
+  .section-title {
+    @apply font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl;
+  }
+
+  .section-copy {
+    @apply max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg;
+  }
+
+  .luxury-card {
+    @apply rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-md transition-all duration-300;
+  }
+
+  .luxury-card:hover {
+    @apply -translate-y-1 border-[#c89b3c]/30 bg-white/[0.055] shadow-2xl shadow-black/30;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
-
