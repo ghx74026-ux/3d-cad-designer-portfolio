@@ -12,6 +12,7 @@ import { Footer } from './components/Footer';
 import { FloatingContacts } from './components/FloatingContacts';
 import { Assistant } from './components/Assistant';
 import { ProjectModal } from './components/ProjectModal';
+import { DesignProcess } from './components/DesignProcess';
 import { PortfolioProject } from './types';
 
 export default function App() {
@@ -27,11 +28,8 @@ export default function App() {
       const currentScroll = window.scrollY ?? window.pageYOffset ?? document.documentElement.scrollTop;
       const elementPosition = targetElement.getBoundingClientRect().top + currentScroll;
       const offsetPosition = Math.max(0, elementPosition - headerOffset);
-      try {
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-      } catch {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
+      try { window.scrollTo({ top: offsetPosition, behavior: 'smooth' }); }
+      catch { targetElement.scrollIntoView({ behavior: 'smooth' }); }
       window.history.replaceState(null, '', `#${sectionId}`);
       setActiveSection(sectionId);
     }
@@ -43,7 +41,7 @@ export default function App() {
   }, [handleNavigate]);
 
   useEffect(() => {
-    const sectionIds = ['home', 'portfolio', 'services', 'skills', 'software', 'about', 'contact'];
+    const sectionIds = ['home', 'portfolio', 'services', 'process', 'skills', 'software', 'about', 'contact'];
     const handleScroll = () => {
       const scrollPosition = (window.scrollY ?? window.pageYOffset ?? document.documentElement.scrollTop) + 120;
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -65,6 +63,7 @@ export default function App() {
         <Hero onNavigate={handleNavigate} />
         <Portfolio onSelectProject={(project) => setSelectedProject(project)} />
         <Services onSelectService={handleDiscussService} />
+        <DesignProcess />
         <Skills />
         <Software />
         <CVSection />
@@ -74,11 +73,7 @@ export default function App() {
       <Footer onNavigate={handleNavigate} />
       <FloatingContacts />
       <Assistant onSelectTopic={handleDiscussService} />
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-        onContactAboutProject={(projectTitle) => handleDiscussService(`Project: ${projectTitle}`)}
-      />
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} onContactAboutProject={(projectTitle) => handleDiscussService(`Project: ${projectTitle}`)} />
     </div>
   );
 }
